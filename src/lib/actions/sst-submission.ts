@@ -44,8 +44,33 @@ export default async function sstFormSubmission(
     return null;
   }
 
+  if (!(approvingOfficer in approvingOfficerTelegrams)) {
+    console.log("Invalid approving officer.");
+    return null;
+  }
+
+  const approvingOfficerTele: string =
+    approvingOfficerTelegrams[approvingOfficer as ApprovingOfficer];
+
+  const message = `
+🚨 New Activity Conducted 🚨
+  
+Conducting Officer: ${conductingOfficer}
+Company: ${company}
+Activity Type: ${transformToTitleCase(activity)}
+Date: ${date}
+Time: ${time}
+Location: ${location}
+Pax: ${noOfParticipants}
+  
+Please approve this conduct by reacting with a 👍.
+  `;
+
+  const id = await sendMessage(approvingOfficerTele, message);
+
   const dbActivity = await prisma.sST.create({
     data: {
+      id: id.toString(),
       conductingOfficer: conductingOfficer.toString(),
       approvingOfficer: approvingOfficer.toString(),
       company: company.toString(),
@@ -57,32 +82,7 @@ export default async function sstFormSubmission(
     },
   });
 
-  if (!(approvingOfficer in approvingOfficerTelegrams)) {
-    console.log("Invalid approving officer.");
-    return null;
-  }
-
-  const approvingOfficerTele: string =
-    approvingOfficerTelegrams[approvingOfficer as ApprovingOfficer];
-
-  const message = `
-🚨 New Activity Conducted 🚨
-(${dbActivity.id})
-  
-Conducting Officer: ${dbActivity.conductingOfficer}
-Company: ${dbActivity.company}
-Activity Type: ${transformToTitleCase(dbActivity.type)}
-Date: ${dbActivity.date}
-Time: ${dbActivity.time}
-Location: ${dbActivity.location}
-Pax: ${dbActivity.noOfParticipants}
-  
-Please approve this conduct by reacting with a 👍.
-  `;
-
-  const teleMessage = await sendMessage(approvingOfficerTele, message);
-
-  if (teleMessage && dbActivity) {
+  if (id && dbActivity) {
     return "success";
   }
 }
