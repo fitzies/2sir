@@ -6,10 +6,12 @@ export async function GET(
 ) {
   const id = (await params).id;
 
+  const first = await prisma.sST.findUnique({ where: { id } });
+
   const res = await prisma.sST.update({
     where: { id },
     data: { approved: true },
   });
 
-  return Response.json({ res });
+  return Response.json({ first });
 }
