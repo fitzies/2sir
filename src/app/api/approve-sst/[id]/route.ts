@@ -6,10 +6,10 @@ export async function GET(
 ) {
   const id = (await params).id;
 
-  const obj = await prisma.sST.update({
+  const res = await prisma.sST.update({
     where: { id },
     data: { approved: true },
   });
 
-  return obj;
+  return Response.json({ res });
 }
