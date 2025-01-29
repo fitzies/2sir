@@ -8,7 +8,7 @@ export async function GET(
 
   const first = await prisma.sST.findUnique({ where: { id } });
 
-  const res = await prisma.sST.update({
+  await prisma.sST.update({
     where: { id },
     data: { approved: true },
   });
