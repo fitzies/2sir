@@ -57,6 +57,7 @@ export default function Page() {
               <SelectItem value="Charlie">Charlie</SelectItem>
               <SelectItem value="Support">Support</SelectItem>
               <SelectItem value="MSC">MSC</SelectItem>
+              <SelectItem value="HQ">HQ</SelectItem>
             </SelectContent>
           </Select>
         </FormElement>
