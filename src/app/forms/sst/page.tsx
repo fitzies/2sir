@@ -1,3 +1,5 @@
+"use client";
+
 import FormElement from "@/components/form-element";
 import PageWrapper from "@/components/page-wrapper";
 import { Button } from "@/components/ui/button";
@@ -10,13 +12,39 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import sstFormSubmission from "@/lib/actions/sst-submission";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default async function Page() {
+export default function Page() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
   return (
-    <PageWrapper className="flex justify-center">
+    <PageWrapper className="flex flex-col items-center">
+      <div className="mb-4 text-left lg:w-2/3 px-2 lg:px-4 flex flex-col gap-1">
+        <h1 className=" font-semibold lg:text-4xl text-3xl ">
+          2SIR SST Application
+        </h1>
+        <p className="text-zinc-400 text-left lg:text-md text-sm">
+          Your approving officer will need to approve this conduct before it can
+          be recorded.
+        </p>
+      </div>
       <form
-        className="lg:w-2/3 w-full bg-zinc-900 h-screen rounded-l flex flex-col px-8 py-12 gap-6"
-        action={sstFormSubmission}
+        className="lg:w-2/3 w-full bg-zinc-900 rounded-lg flex flex-col px-8 py-12 gap-6"
+        onSubmit={async (e) => {
+          e.preventDefault(); // Prevent default form submission
+          setLoading(true);
+          try {
+            const formData = new FormData(e.currentTarget);
+            const res = await sstFormSubmission(formData);
+            if (res) {
+              router.push("/forms/sst/success");
+            }
+          } catch (error) {
+            console.log(JSON.stringify(error));
+            alert("Something went wrong. Please try again.");
+          }
+        }}
       >
         <FormElement name="Company">
           <Select name="company" required>
@@ -117,7 +145,13 @@ export default async function Page() {
             </SelectContent>
           </Select>
         </FormElement>
-        <Button className="!py-5">Submit</Button>
+        {!loading ? (
+          <Button className="!py-5 mt-4">Submit</Button>
+        ) : (
+          <Button className="!py-5 mt-4" disabled>
+            ...
+          </Button>
+        )}
       </form>
     </PageWrapper>
   );
