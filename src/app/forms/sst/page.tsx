@@ -30,7 +30,7 @@ export default function Page() {
         </p>
       </div>
       <form
-        className="lg:w-2/3 w-full bg-zinc-900 rounded-lg flex flex-col px-8 py-12 gap-6"
+        className="lg:w-2/3 w-full bg-zinc-900 bg-opacity-50 rounded-lg flex flex-col px-8 py-12 gap-6"
         onSubmit={async (e) => {
           e.preventDefault(); // Prevent default form submission
           setLoading(true);
