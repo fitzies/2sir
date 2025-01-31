@@ -6,11 +6,12 @@ import { transformToTitleCase } from "../utils";
 
 const approvingOfficerTelegrams = {
   test: "1610163233",
-  // "cpt-priya": "+6592375445",
+  "cpt-priya": "109493820",
   "cpt-kumar": "1015935802",
-  // "cpt-oh-en-quan": "+6588334034",
-  // "cpt-sunny": "+6596785645",
-  // "lta-rausyan": "+6593699497",
+  "cpt-oh-en-quan": "480853147",
+  "cpt-sunny": "400132298",
+  "cpt-junkai": "18436541",
+  "cpt-benjamn": "1455627949",
 } as const;
 
 type ApprovingOfficer = keyof typeof approvingOfficerTelegrams;

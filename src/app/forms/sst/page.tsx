@@ -137,11 +137,9 @@ export default function Page() {
               <SelectItem value="cpt-sunny">CPT SUNNY</SelectItem>
               <SelectItem value="cpt-oh-en-quan">CPT OH EN QUAN</SelectItem>
               <SelectItem value="cpt-priya">CPT PRIYA</SelectItem>
-              <SelectItem value="lta-rausyan">LTA RAUSYAN</SelectItem>
+              <SelectItem value="cpt-benjamn">CPT BENJAMN</SelectItem>
               <SelectItem value="cpt-kumar">CPT KUMAR</SelectItem>
               <SelectItem value="cpt-junkai">CPT JUNKAI</SelectItem>
-              <SelectItem value="test">TEST</SelectItem>
-              {/* <SelectItem value="2wo-justin">2WO JUSTIN</SelectItem> */}
             </SelectContent>
           </Select>
         </FormElement>
