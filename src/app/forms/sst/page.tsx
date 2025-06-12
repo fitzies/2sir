@@ -30,7 +30,7 @@ export default function Page() {
         </p>
       </div>
       <form
-        className="lg:w-2/3 w-full bg-zinc-900 bg-opacity-50 rounded-lg flex flex-col px-8 py-12 gap-6"
+        className="lg:w-2/3 w-full bg-zinc-900/60 backdrop-blur-sm border border-zinc-700/50 rounded-xl flex flex-col px-8 py-12 gap-8 shadow-2xl"
         onSubmit={async (e) => {
           e.preventDefault(); // Prevent default form submission
           setLoading(true);
@@ -48,8 +48,8 @@ export default function Page() {
       >
         <FormElement name="Company">
           <Select name="company" required>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Company" />
+            <SelectTrigger className="w-full h-12 border-zinc-600 focus:border-zinc-400 transition-colors">
+              <SelectValue placeholder="Select Company" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="Alpha">Alpha</SelectItem>
@@ -68,6 +68,7 @@ export default function Page() {
             required
             pattern="\d{2}\d{2}\d{2}"
             title="Please enter the date in the format DDMMYY (e.g., 310123 for 31st January 2023)"
+            className="h-12 border-zinc-600 focus:border-zinc-400 transition-colors"
           />
         </FormElement>
         <FormElement name="Time of Conduct" description="HHMM-HHMM">
@@ -76,12 +77,13 @@ export default function Page() {
             type="text"
             required
             name="time-of-conduct"
+            className="h-12 border-zinc-600 focus:border-zinc-400 transition-colors"
           />
         </FormElement>
         <FormElement name="Type of activity">
           <Select required name="activity">
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Activity" />
+            <SelectTrigger className="w-full h-12 border-zinc-600 focus:border-zinc-400 transition-colors">
+              <SelectValue placeholder="Select Activity Type" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="balance-flexibility-mobility">
@@ -104,7 +106,12 @@ export default function Page() {
           name="Location"
           description="Only in-camp locations are allowed."
         >
-          <Input name="location" type="text" required />
+          <Input
+            name="location"
+            type="text"
+            required
+            className="h-12 border-zinc-600 focus:border-zinc-400 transition-colors"
+          />
         </FormElement>
         <FormElement
           name="Number of Participants"
@@ -116,6 +123,7 @@ export default function Page() {
             max={10}
             min={2}
             required
+            className="h-12 border-zinc-600 focus:border-zinc-400 transition-colors"
           />
         </FormElement>
         <FormElement
@@ -127,28 +135,43 @@ export default function Page() {
             type="text"
             pattern="^(?:[1-9][A-Z]{2}|[A-Z]{3})\s[A-Z]+(?:\s[A-Z]+)*$"
             required
+            className="h-12 border-zinc-600 focus:border-zinc-400 transition-colors"
           />
         </FormElement>
         <FormElement name="Approving Officer">
           <Select required name="approving-officer">
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Approving Officer" />
+            <SelectTrigger className="w-full h-12 border-zinc-600 focus:border-zinc-400 transition-colors">
+              <SelectValue placeholder="Select Approving Officer" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="cpt-sunny">CPT SUNNY</SelectItem>
-              <SelectItem value="cpt-oh-en-quan">CPT OH EN QUAN</SelectItem>
-              <SelectItem value="cpt-priya">CPT PRIYA</SelectItem>
-              <SelectItem value="cpt-benjamn">CPT BENJAMN</SelectItem>
-              <SelectItem value="cpt-kumar">CPT KUMAR</SelectItem>
-              <SelectItem value="cpt-junkai">CPT JUNKAI</SelectItem>
+              <SelectItem value="benjamin-nah-jing-wen">
+                CPT BENJAMIN NAH JING WEN
+              </SelectItem>
+              <SelectItem value="muhammad-alfian-bin-aman">
+                CPT MUHAMMAD ALFIAN BIN AMAN
+              </SelectItem>
+              <SelectItem value="brennan-kazuki-sato">
+                CPT BRENNAN KAZUKI SATO
+              </SelectItem>
+              <SelectItem value="eddie-lee-kuan-seng">
+                CPT EDDIE LEE KUAN SENG
+              </SelectItem>
+              <SelectItem value="charles-liow-meng-yi">
+                CPT CHARLES LIOW MENG YI
+              </SelectItem>
+              <SelectItem value="andy-lam-ye-kai">
+                CPT ANDY LAM YE KAI
+              </SelectItem>
             </SelectContent>
           </Select>
         </FormElement>
         {!loading ? (
-          <Button className="!py-5 mt-4">Submit</Button>
+          <Button className="!py-6 mt-6 h-14 text-lg font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg">
+            Submit Application
+          </Button>
         ) : (
-          <Button className="!py-5 mt-4" disabled>
-            ...
+          <Button className="!py-6 mt-6 h-14 text-lg" disabled>
+            Processing...
           </Button>
         )}
       </form>
